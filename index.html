@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My nav-demo</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <head></head>
+    <main >
+        <div class="wrapper" id='keyboard'>
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+        var keys = {
+            0: ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+            1: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+            2: ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+            length: 3
+        }
+        var hash = {
+            q: 'http://qq.com',
+            w: 'https://weibo.com',
+            e: 'https://www.ele.me',
+            r: 'http://www.renren.com/',
+            t: 'https://www.taobao.com/',
+            y: 'https://www.youtube.com/?hl=zh-CN',
+            u: 'http://www.uc.cn/',
+            i: 'http://www.iqiyi.com/',
+            o: 'https://www.opera.com/zh-cn',
+            p: 'http://www.pptv.com/',
+            a: 'https://www.aliyun.com/',
+            s: 'http://www.sohu.com/',
+            d: 'http://cd.qq.com/',
+            f: 'http://www.acfun.cn/',
+            m: 'https://www.mcdonalds.com.cn/',
+        }
+
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('box' || 'null'))
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage
+        }
+
+        index = 0
+        while (index < keys['length']) {
+            Newdiv = document.createElement('div');
+            keyboard.appendChild(Newdiv);
+            row=keys[index]
+            index2=0
+            while(index2<row['length']){
+            Newkbd = document.createElement('kbd')
+            Newkbd.textContent = row[index2]
+            Newdiv.appendChild(Newkbd)
+            bottomx = document.createElement('button')
+            bottomx.textContent = '编辑'
+            bottomx.id = row[index2]
+            bottomx.onclick = function(whateverw){
+                key = whateverw['target']['id'] 
+                x = prompt("请输入你要重置的网址")
+                hash[key] = x
+                localStorage.setItem('box',JSON.stringify(hash))
+            }
+            Newkbd.appendChild(bottomx)
+            index2=index2+1
+            }
+            index = index+1
+       }
+
+       document.onkeypress = function(whatever){
+           key = (whatever['key'])
+           website = hash[key]
+           //location.href = website
+           window.open(website,'_blank')
+       }
+    </script>
+</body>
+
+</html>
