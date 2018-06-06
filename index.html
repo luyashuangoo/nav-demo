@@ -35,10 +35,21 @@
             i: 'http://www.iqiyi.com/',
             o: 'https://www.opera.com/zh-cn',
             p: 'http://www.pptv.com/',
-            a: 'https://www.aliyun.com/',
+            a: 'http://www.acfun.cn/',
             s: 'http://www.sohu.com/',
             d: 'http://cd.qq.com/',
             f: 'http://www.acfun.cn/',
+            g: 'https://www.google.com/',
+            h: 'https://bbs.hupu.com/',
+            j: 'https://jirengu.com/',
+            k: 'http://36kr.com/',
+            l: 'https://cn.linkedin.com/',
+            z: 'https://www.zhihu.com/',
+            x: 'http://www.sina.com.cn/',
+            c: 'http://tv.cctv.com/live/cctv5/',
+            v: 'https://www.v2ex.com/',
+            b: 'https://www.bilibili.com/',
+            n: 'http://china.nba.com/',
             m: 'https://www.mcdonalds.com.cn/',
         }
 
@@ -51,21 +62,33 @@
         while (index < keys['length']) {
             Newdiv = document.createElement('div');
             keyboard.appendChild(Newdiv);
+            Newdiv.className = "row"
             row=keys[index]
             index2=0
             while(index2<row['length']){
             Newkbd = document.createElement('kbd')
-            Newkbd.textContent = row[index2]
+            span = document.createElement('span')
+            span.className = ('text')
+            span.textContent = row[index2]
+            Newkbd.appendChild(span)
+            Newkbd.className = "keys"
             Newdiv.appendChild(Newkbd)
             bottomx = document.createElement('button')
-            bottomx.textContent = '编辑'
+            bottomx.textContent = 'E'
             bottomx.id = row[index2]
+            image = document.createElement('img')
+            if(hash[row[index2]]){   
+            image.src = hash[row[index2]] + '/favicon.ico'
+            }else{
+                img.src = 'https://i.loli.net/2018/06/06/5b17feafdb7c0.png'
+            }
             bottomx.onclick = function(whateverw){
                 key = whateverw['target']['id'] 
                 x = prompt("请输入你要重置的网址")
                 hash[key] = x
                 localStorage.setItem('box',JSON.stringify(hash))
             }
+            Newkbd.appendChild(image)
             Newkbd.appendChild(bottomx)
             index2=index2+1
             }
